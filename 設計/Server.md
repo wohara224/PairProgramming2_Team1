@@ -3,12 +3,15 @@
 ## 環境
 
 Nugetパッケージ
+- Dapper : SQL操作
+- Microsoft.Data.SqlClient : DB通信パッケージ
+- Microsoft.AspNetCore.OpenAPI : Aip通信パッケージ
 - NLog : ログ出力
 - NLog.Schema : ログ設定時のインテリセンス（候補入力）
 
 ## データ定義
 
-Task
+TaskItem
 - タスク番号：TaskId (int)
 - タスク名：TaskName (string)
 - 優先度：TaskPriority (int)
@@ -19,33 +22,33 @@ Task
 
 一覧取得：なし
 
-データ登録：AddRequest
+データ登録：AddReq
 - タスク名：TaskName (string)
 - 優先度：TaskPriority (int)
 
-優先度編集：EditPrirortyRequest
+優先度編集：EditPrirortyReq
 - タスクID：TaskId (int)
 - 優先度：TaskPriority (int)
 
-ステータス編集：EditStatusRequest
+ステータス編集：EditStatusReq
 - タスクID：TaskId (int)
 - 完了/未完了：TaskStatus (int)
 
-データ削除：DeleteRequest
+データ削除：DeleteReq
 - タスクID：TaskId (int)
 
 ## レスポンス用DTO
 
-一覧取得：IndexResponse
-- タスク一覧：Tasks (List:Task)
+一覧取得：IndexRes
+- タスク一覧：Tasks (List:TaskSummary)
 
-タスク個別のステータス：Task
+タスク個別のステータス：TaskSummary
 - タスクID：TaskId (int)
 - タスク名：TaskName (string)
 - 優先度：TaskPrirorty (int)
 - 完了/未完了：TaskStatus (int)
 
-汎用エラー：ErrorResponse
+汎用エラー：ErrorRes
   - エラーアイテム：Errors (ErrorItem)
 
 エラーアイテム：ErrorItem
