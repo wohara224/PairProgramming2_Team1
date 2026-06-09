@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "OKGTfGlCnHY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\wohara\\Documents\\研修\\ペア開発\\PairProgramming2_Team1\\PairPrograming2\\PairPrograming2\\PairPrograming2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wohara\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.8\\microsoft.aspnetcore.openapi.10.0.8.nupkg.sha512",
+    "C:\\Users\\wohara\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
