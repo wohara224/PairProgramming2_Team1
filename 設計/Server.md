@@ -10,26 +10,26 @@ Nugetパッケージ
 
 Task
 - タスク番号：TaskId (int)
-- タスク名：Title (string)
-- 優先度：Priority (int)
+- タスク名：TaskName (string)
+- 優先度：TaskPriority (int)
 - 期限：Limit (DateTime)
-- 完了/未完了：Status (int)
+- 完了/未完了：TaskStatus (int)
 
 ## リクエスト用DTO
 
 一覧取得：なし
 
 データ登録：AddRequest
-- タスク名：Title (string)
-- 優先度：Priority (int)
+- タスク名：TaskName (string)
+- 優先度：TaskPriority (int)
 
 優先度編集：EditPrirortyRequest
 - タスクID：TaskId (int)
-- 優先度：Priority (int)
+- 優先度：TaskPriority (int)
 
 ステータス編集：EditStatusRequest
 - タスクID：TaskId (int)
-- 完了/未完了：Status (int)
+- 完了/未完了：TaskStatus (int)
 
 データ削除：DeleteRequest
 - タスクID：TaskId (int)
@@ -41,15 +41,24 @@ Task
 
 タスク個別のステータス：Task
 - タスクID：TaskId (int)
-- タスク名：Title (string)
-- 優先度：Prirorty (int)
-- 完了/未完了：Status (int)
+- タスク名：TaskName (string)
+- 優先度：TaskPrirorty (int)
+- 完了/未完了：TaskStatus (int)
 
 汎用エラー：ErrorResponse
   - エラーアイテム：Errors (ErrorItem)
 
 エラーアイテム：ErrorItem
 - エラー内容：Message (string)
+
+## DB定義
+
+tasks
+- task_id INT IDENTITY (1,1) PK,
+- task_name NVARCHAR(30) NOT NULL,
+- task_priority INT NOT NULL DEFAULT 1,
+- task_limit DATE DEFAULT DATEADD(day, 7, GETDATE()),
+- task_status INT NOT NULL DEFAULT 0
 
 ## 画面構成
 
