@@ -97,8 +97,8 @@
 [POST] /add
 ``` json
 {
-  "taskname": "XXX",
-  "taskpriority": 1
+  "taskName": "XXX",
+  "taskPriority": 1
 }
 ```
 
@@ -107,8 +107,8 @@
 [POST] /editpriorty
 ``` json
 {
-  "taskid": 1,
-  "taskpriority": 2
+  "taskId": 1,
+  "taskPriority": 2
 }
 ```
 
@@ -117,8 +117,8 @@
 [POST] /editstatus
 ``` json
 {
-  "taskid": 1,
-  "taskstatus": 1
+  "taskId": 1,
+  "taskStatus": 1
 }
 ```
 
@@ -127,7 +127,7 @@
 [POST] /delete
 ``` json
 {
-  "taskid": 1
+  "taskId": 1
 }
 ```
 
@@ -139,10 +139,10 @@
 ``` json
 {
   "tasks":[
-    {"taskid": 1, "taskname": "XXX", "taskpriority": 1, "taskstatus": 1 },
-    {"taskid": 2, "taskname": "XXX", "taskpriority": 2, "taskstatus": 1 },
-    {"taskid": 3, "taskname": "XXX", "taskpriority": 3, "taskstatus": 0 },
-    {"taskid": 4, "taskname": "XXX", "taskpriority": 1, "taskstatus": 0 }
+    {"taskId": 1, "taskName": "XXX", "taskPriority": 1, "taskStatus": 1 },
+    {"taskId": 2, "taskName": "XXX", "taskPriority": 2, "taskStatus": 1 },
+    {"taskId": 3, "taskName": "XXX", "taskPriority": 3, "taskStatus": 0 },
+    {"taskId": 4, "taskName": "XXX", "taskPriority": 1, "taskStatus": 0 }
   ]
 }
 ```
