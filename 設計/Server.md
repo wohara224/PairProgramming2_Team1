@@ -6,8 +6,7 @@ Nugetパッケージ
 - Dapper : SQL操作
 - Microsoft.Data.SqlClient : DB通信パッケージ
 - Microsoft.AspNetCore.OpenAPI : Aip通信パッケージ
-- NLog : ログ出力
-- NLog.Schema : ログ設定時のインテリセンス（候補入力）
+- NLog.Web.AspNetCore : ログ出力
 
 ## データ定義
 
