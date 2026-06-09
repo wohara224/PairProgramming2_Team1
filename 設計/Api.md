@@ -97,8 +97,8 @@
 [POST] /add
 ``` json
 {
-  "title": "XXX",
-  "priority": 1
+  "taskname": "XXX",
+  "taskpriority": 1
 }
 ```
 
@@ -108,7 +108,7 @@
 ``` json
 {
   "taskid": 1,
-  "priority": 2
+  "taskpriority": 2
 }
 ```
 
@@ -118,7 +118,7 @@
 ``` json
 {
   "taskid": 1,
-  "status": 1
+  "taskstatus": 1
 }
 ```
 
@@ -139,10 +139,10 @@
 ``` json
 {
   "tasks":[
-    {"taskid": 1, "title": "XXX", "priority": 1, "status": 1 },
-    {"taskid": 2, "title": "XXX", "priority": 2, "status": 1 },
-    {"taskid": 3, "title": "XXX", "priority": 3, "status": 0 },
-    {"taskid": 4, "title": "XXX", "priority": 1, "status": 0 }
+    {"taskid": 1, "taskname": "XXX", "taskpriority": 1, "taskstatus": 1 },
+    {"taskid": 2, "taskname": "XXX", "taskpriority": 2, "taskstatus": 1 },
+    {"taskid": 3, "taskname": "XXX", "taskpriority": 3, "taskstatus": 0 },
+    {"taskid": 4, "taskname": "XXX", "taskpriority": 1, "taskstatus": 0 }
   ]
 }
 ```
