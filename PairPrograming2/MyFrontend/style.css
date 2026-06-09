@@ -1,3 +1,8 @@
+h1{
+    text-align: center;
+    color: blue;
+}
+
 body{
     margin: 0;
     padding: 20px;
@@ -32,6 +37,11 @@ body{
 
 .task-title{
     flex: 1;
+}
+
+.btn-delete-task{
+    color: red;
+    border: red 1px solid;
 }
 
 .add-area{
@@ -79,4 +89,7 @@ body{
 #add-task-btn{
     width: 80px;
     height: 42px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
 }
