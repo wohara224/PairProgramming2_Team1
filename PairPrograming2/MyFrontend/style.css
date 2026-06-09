@@ -6,25 +6,6 @@ body{
     padding-bottom: 100px;
 }
 
-.add-area{
-    position: fixed;
-
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
-    padding: 15px;
-
-    background-color: white;
-    border-top: 1px solid #ccc;
-}
-
 #task-list{
     display: flex;
     flex-direction: column;
@@ -51,4 +32,51 @@ body{
 
 .task-title{
     flex: 1;
+}
+
+.add-area{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box{
+    width: 610px; /* 700 - ボタン幅 - gap */
+
+    display: flex;
+    align-items: center;
+
+    padding: 10px 15px;
+
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    background-color: white;
+}
+
+#new-task-title{
+    flex: 1;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: 16px;
+}
+
+#new-task-priority{
+    margin-left: auto;
+
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+#add-task-btn{
+    width: 80px;
+    height: 42px;
 }
