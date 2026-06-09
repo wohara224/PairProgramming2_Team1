@@ -12,7 +12,7 @@ Task
 - タスク番号：TaskId (int)
 - タスク名：TaskName (string)
 - 優先度：TaskPriority (int)
-- 期限：Limit (DateTime)
+- 期限：TaskLimit (DateTime)
 - 完了/未完了：TaskStatus (int)
 
 ## リクエスト用DTO
