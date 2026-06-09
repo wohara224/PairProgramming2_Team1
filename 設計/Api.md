@@ -53,7 +53,15 @@
     - JSONが不正；400（INVALID_REQUEST）
     - タイトルが空白：400（TITLE_IS_NULL）
   
-[POST] データ変更
+[POST] 優先度変更
+1. クライアントから登録情報をもらう
+2. バリデーションチェック後にデータを変更し、結果を返す
+    - 正常なリクエスト：200
+    - POST以外のリクエスト：405
+    - JSONが不正；400（INVALID_REQUEST）
+    - 指定したデータがない：404（TASK_NOT_FOUND）
+
+[POST] ステータス変更
 1. クライアントから登録情報をもらう
 2. バリデーションチェック後にデータを変更し、結果を返す
     - 正常なリクエスト：200
@@ -90,18 +98,27 @@
 ``` json
 {
   "title": "XXX",
-  "priority": 1, 
+  "priority": 1
 }
 ```
 
-データ変更
+優先度変更
 
-[POST] /edit
+[POST] /editprirorty
 ``` json
 {
   "taskid": 1,
-  "priority": 2,
-  "status": 1,
+  "priority": 2
+}
+```
+
+ステータス変更
+
+[POST] /editstatus
+``` json
+{
+  "taskid": 1,
+  "status": 1
 }
 ```
 
@@ -110,7 +127,7 @@
 [POST] /delete
 ``` json
 {
-  "taskid": 1,
+  "taskid": 1
 }
 ```
 
