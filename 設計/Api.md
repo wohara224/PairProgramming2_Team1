@@ -104,7 +104,7 @@
 
 優先度変更
 
-[POST] /editprirorty
+[POST] /editpriorty
 ``` json
 {
   "taskid": 1,
@@ -156,7 +156,7 @@
 
 優先度変更
 
-/editprirorty
+/editpriorty
 ``` json
 {}
 ```
@@ -210,12 +210,12 @@
 
 優先度変更
 
-/editprirorty / GET以外のメソッドを受信した（405）
+/editpriorty / GET以外のメソッドを受信した（405）
 ``` json
 {}
 ```
 
-/editprirorty / JSONがおかしい、変換できない（400）
+/editpriorty / JSONがおかしい、変換できない（400）
 ``` json
 {
   "errors": [
@@ -224,7 +224,7 @@
 }
 ```
 
-/editprirorty / タスクが存在しない（404）
+/editpriorty / タスクが存在しない（404）
 ``` json
 {
   "errors": [
