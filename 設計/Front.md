@@ -5,7 +5,7 @@
 - 優先度選択(プルダウン) : id="new-task-priority"
 - 登録ボタン : id="add-task-btn"
 - タスク一覧 : id="task-list"
-
+-
 - タスク数だけ自動生成されるボタン等には識別用のIDを割り振り
 - 完了/未完了チェックボックス : class="task-status-check" data-id="123"
 - 優先度変更(プルダウン) : class="task-priority-select" data-id="123"
