@@ -7,6 +7,7 @@ Nugetパッケージ
 - Microsoft.Data.SqlClient : DB通信パッケージ
 - Microsoft.AspNetCore.OpenAPI : Aip通信パッケージ
 - NLog.Web.AspNetCore : ログ出力
+- NLog
 
 ## データ定義
 
