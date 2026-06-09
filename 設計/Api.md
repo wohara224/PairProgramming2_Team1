@@ -154,9 +154,16 @@
 {}
 ```
 
-データ変更
+優先度変更
 
-/edit
+/editprirorty
+``` json
+{}
+```
+
+ステータス変更
+
+/editstatus
 ``` json
 {}
 ```
@@ -201,14 +208,14 @@
 }
 ```
 
-データ変更
+優先度変更
 
-/edit / GET以外のメソッドを受信した（405）
+/editprirorty / GET以外のメソッドを受信した（405）
 ``` json
 {}
 ```
 
-/edit / JSONがおかしい、変換できない（400）
+/editprirorty / JSONがおかしい、変換できない（400）
 ``` json
 {
   "errors": [
@@ -217,7 +224,32 @@
 }
 ```
 
-/edit / タスクが存在しない（404）
+/editprirorty / タスクが存在しない（404）
+``` json
+{
+  "errors": [
+    { "message": "TASK_NOT_FOUND" }
+  ]
+}
+```
+
+ステータス変更
+
+/editstatus / GET以外のメソッドを受信した（405）
+``` json
+{}
+```
+
+/editstatus / JSONがおかしい、変換できない（400）
+``` json
+{
+  "errors": [
+    { "message": "INVALID_REQUEST" }
+  ]
+}
+```
+
+/editstatus / タスクが存在しない（404）
 ``` json
 {
   "errors": [
