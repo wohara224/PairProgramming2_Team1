@@ -8,48 +8,42 @@ Nugetパッケージ
 
 ## データ定義
 
-科目：Subject
-- 科目番号：Id (int)
-- 名前：Name (string)
-
-生徒：Student
-- 生徒番号：Id (int)
-- 名前：Name (string)
-
-成績：TestResult
-- 管理番号：Id (int)
-- 生徒：Student (Student)
-- 科目：Subject (Subject)
-- 点数：Score (int)
+Task
+- タスク番号：TaskId (int)
+- タスク名：Title (string)
+- 優先度：Priority (int)
+- 期限：Limit (DateTime)
+- 完了/未完了：Status (int)
 
 ## リクエスト用DTO
 
-成績登録：RegisterRequest
-- 生徒ID：StudentId (int)
-- 科目ID：SubjectId (int)
-- 点数：Score (int)
+一覧取得：なし
 
-個人別スコア：なし
+データ登録：AddRequest
+- タスク名：Title (string)
+- 優先度：Priority (int)
 
-科目別成績リスト：なし
+優先度編集：EditPrirortyRequest
+- タスクID：TaskId (int)
+- 優先度：Priority (int)
+
+ステータス編集：EditStatusRequest
+- タスクID：TaskId (int)
+- 完了/未完了：Status (int)
+
+データ削除：DeleteRequest
+- タスクID：TaskId (int)
 
 ## レスポンス用DTO
 
-個人別スコア：StudentScoresResponse
-- 生徒名：Name (string)
-- 成績リスト：Subjects (List:SubjectScore)
+一覧取得：IndexResponse
+- タスク一覧：Tasks (List:Task)
 
-科目個別の成績：SubjectScore
-- 科目名：Name (string)
-- 点数：Score (int)
-
-科目別成績リスト：SubjectScoresResponse
-- 科目名:Name (string)
-- 生徒リスト：Students (List:StudentScore)
-
-生徒別の成績：StudentScore
-- 生徒名：Name (string)
-- 点数：Score (int)
+タスク個別のステータス：Task
+- タスクID：TaskId (int)
+- タスク名：Title (string)
+- 優先度：Prirorty (int)
+- 完了/未完了：Status (int)
 
 汎用エラー：ErrorResponse
   - エラーアイテム：Errors (ErrorItem)
@@ -65,7 +59,7 @@ Nugetパッケージ
 
 ``` bash
 ========================================
-【成績管理スタブ】が起動しました
+【タスク管理スタブ】が起動しました
    ポート番号: 8080
 ========================================
 ペアのPC（クライアント）からの通信を待っています...
@@ -75,7 +69,7 @@ localhost起動
 
 ``` bash
 ========================================
-【成績管理スタブ】が起動しました
+【タスク管理スタブ】が起動しました
    ポート番号: 8080 (localhost)
 ========================================
 ペアのPC（クライアント）からの通信を待っています...
