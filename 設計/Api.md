@@ -192,20 +192,17 @@
 
 /add / JSONがおかしい、変換できない（400）
 ``` json
-{
-  "errors": [
-    { "message": "INVALID_REQUEST" }
-  ]
-}
+{ "message": "INVALID_REQUEST" }
 ```
 
 /add / タスク名がない（400）
 ``` json
-{
-  "errors": [
-    { "message": "TITLE_IS_NULL" }
-  ]
-}
+{ "message": "TITLE_IS_NULL" }
+```
+
+/add / タスク名が30文字以上（400）
+``` json
+{ "message": "TITLE_OVER_LENGTH" }
 ```
 
 優先度変更
@@ -217,20 +214,17 @@
 
 /editpriorty / JSONがおかしい、変換できない（400）
 ``` json
-{
-  "errors": [
-    { "message": "INVALID_REQUEST" }
-  ]
-}
+{ "message": "INVALID_REQUEST" }
+```
+
+/editpriorty / 優先度の値が範囲外（400）
+``` json
+{ "message": "INVALID_PRIORITY" }
 ```
 
 /editpriorty / タスクが存在しない（404）
 ``` json
-{
-  "errors": [
-    { "message": "TASK_NOT_FOUND" }
-  ]
-}
+{ "message": "TASK_NOT_FOUND" }
 ```
 
 ステータス変更
@@ -242,20 +236,17 @@
 
 /editstatus / JSONがおかしい、変換できない（400）
 ``` json
-{
-  "errors": [
-    { "message": "INVALID_REQUEST" }
-  ]
-}
+{ "message": "INVALID_REQUEST" }
+```
+
+/editstatus / ステータスの値が範囲外（400）
+``` json
+{ "message": "INVALID_STATUS" }
 ```
 
 /editstatus / タスクが存在しない（404）
 ``` json
-{
-  "errors": [
-    { "message": "TASK_NOT_FOUND" }
-  ]
-}
+{ "message": "TASK_NOT_FOUND" }
 ```
 
 データ削除
@@ -267,20 +258,12 @@
 
 /delete / JSONがおかしい、変換できない（400）
 ``` json
-{
-  "errors": [
-    { "message": "INVALID_REQUEST" }
-  ]
-}
+{ "message": "INVALID_REQUEST" }
 ```
 
 /delete / タスクが存在しない（404）
 ``` json
-{
-  "errors": [
-    { "message": "TASK_NOT_FOUND" }
-  ]
-}
+{ "message": "TASK_NOT_FOUND" }
 ```
 
 その他
@@ -288,5 +271,10 @@
 URLが上記以外のもの（404）
 ``` json
 {}
+```
+
+システムエラー（500）
+``` json
+{ "message": "SYSTEM_ERROR" }
 ```
 
