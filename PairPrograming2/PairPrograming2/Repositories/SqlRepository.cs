@@ -51,7 +51,7 @@ public class SqlRepository : ISqlRepository
         await connection.ExecuteAsync(sql, req); 
     }
 
-    public async Task UpdatePriority(EditPriorityReq req)
+    public async Task<int> UpdatePriority(EditPriorityReq req)
     {
         using var connection
             = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
@@ -61,10 +61,11 @@ public class SqlRepository : ISqlRepository
             SET task_priority = @TaskPriority
             WHERE task_id = @TaskId;";
 
-        await connection.ExecuteAsync(sql, req);
+        return await connection.ExecuteAsync(sql, req);
+
     }
 
-    public async Task UpdateStatus(EditStatusReq req)
+    public async Task<int> UpdateStatus(EditStatusReq req)
     {
         using var connection
             = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
@@ -74,10 +75,10 @@ public class SqlRepository : ISqlRepository
             SET task_status = @TaskStatus
             WHERE task_id = @TaskId;";
 
-        await connection.ExecuteAsync(sql, req);
+        return await connection.ExecuteAsync(sql, req);
     }
 
-    public async Task DeleteTask(int TaskId)
+    public async Task<int> DeleteTask(int TaskId)
     {
         using var connection
             = new SqlConnection(_config.GetConnectionString("DefaultConnection"));
@@ -86,7 +87,7 @@ public class SqlRepository : ISqlRepository
             DELETE FROM tasks
             WHERE task_id = @TaskId;";
 
-        await connection.ExecuteAsync(sql, new { TaskId });
+        return await connection.ExecuteAsync(sql, new { TaskId });
     }
 
 }
