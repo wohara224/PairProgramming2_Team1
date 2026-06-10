@@ -1,23 +1,5 @@
-//JSONダミーデータ
-const data = {
-    "tasks": [
-        { "taskId": 1, "taskName": "発表資料作成", "taskPriority": 1, "taskStatus": 1 },
-        { "taskId": 2, "taskName": "API実装", "taskPriority": 2, "taskStatus": 1 },
-        { "taskId": 3, "taskName": "画面デザイン調整", "taskPriority": 3, "taskStatus": 0 },
-        { "taskId": 4, "taskName": "バグ修正", "taskPriority": 1, "taskStatus": 0 }
-    ]
-};
-
-///////////////////////////////////////////////////////////////////////////////////////////
-
 //サーバーから取得したデータを入れる
 var fetchedTasks = [];
-
-// //動作確認用ボタンがクリックされたとき
-// let button = document.getElementById("delete");
-// button.addEventListener("click", () => {
-//     fetchTasks();
-// });
 
 //ページを開いたときにタスク一覧を読み出す
 document.addEventListener('DOMContentLoaded', () => {
@@ -98,12 +80,8 @@ async function fetchTasks() {
     //一旦クリア
     taskList.innerHTML = '';
 
-    //ダミーデータ代入
-    // fetchedTasks = data;
-
     //JOSN内のデータの数だけforeachでループ
     fetchedTasks.tasks.forEach(task => {
-        console.log("C#から届いたタスクの生データ:", task);
         // ステータスに応じてチェック状態(checked)を判定
         // taskStatus: 1=完了(checked属性あり), 0=未完了(属性なし)
         const isChecked = task.taskStatus === 1 ? 'checked' : '';
@@ -165,7 +143,7 @@ async function addTask() {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        //const response = await fetch('http://localhost:5163/api/todo/add', {
+        // const response = await fetch('http://localhost:5163/api/todo/add', {
         const response = await fetch('http://172.16.7.15:8080/api/Todo/add', {
             method: 'POST',
             headers: {
@@ -227,7 +205,6 @@ async function deleteTask(taskId) {
         taskId: taskId
     };
 
-    console.log("deleteTaskに渡ってきた値:", taskId);
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
         // const response = await fetch('http://localhost:5163/api/todo/delete', {
