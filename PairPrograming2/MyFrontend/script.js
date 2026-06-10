@@ -1,10 +1,10 @@
 //JSONダミーデータ
 const data = {
     "tasks": [
-        { "taskid": 1, "taskname": "発表資料作成", "taskpriority": 1, "taskstatus": 1 },
-        { "taskid": 2, "taskname": "API実装", "taskpriority": 2, "taskstatus": 1 },
-        { "taskid": 3, "taskname": "画面デザイン調整", "taskpriority": 3, "taskstatus": 0 },
-        { "taskid": 4, "taskname": "バグ修正", "taskpriority": 1, "taskstatus": 0 }
+        { "taskId": 1, "taskName": "発表資料作成", "taskPriority": 1, "taskStatus": 1 },
+        { "taskId": 2, "taskName": "API実装", "taskPriority": 2, "taskStatus": 1 },
+        { "taskId": 3, "taskName": "画面デザイン調整", "taskPriority": 3, "taskStatus": 0 },
+        { "taskId": 4, "taskName": "バグ修正", "taskPriority": 1, "taskStatus": 0 }
     ]
 };
 
@@ -13,9 +13,14 @@ const data = {
 //サーバーから取得したデータを入れる
 var fetchedTasks = [];
 
-//動作確認用ボタンがクリックされたとき
-let button = document.getElementById("delete");
-button.addEventListener("click", () => {
+// //動作確認用ボタンがクリックされたとき
+// let button = document.getElementById("delete");
+// button.addEventListener("click", () => {
+//     fetchTasks();
+// });
+
+//ページを開いたときにタスク一覧を読み出す
+document.addEventListener('DOMContentLoaded', () => {
     fetchTasks();
 });
 
@@ -59,7 +64,8 @@ async function fetchTasks() {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('/api/todo');
+        // const response = await fetch('http://localhost:5163/api/todo/index');
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/index');
 
         if (response.ok) {
             // 届いたJSONデータをJavaScriptの配列に変換して格納
@@ -78,10 +84,12 @@ async function fetchTasks() {
                 console.error("サーバーエラーが発生しました");
                 alert("サーバーエラーが発生しました:\nステータスコード: " + response.status);
             }
+            return;
         }
     } catch (error) {
         console.error("通信に失敗しました: ", error);
         alert("通信に失敗しました:\n" + error.message);
+        return;
     }
 
     //HTMLからId=task-listの内容を取得
@@ -95,30 +103,31 @@ async function fetchTasks() {
 
     //JOSN内のデータの数だけforeachでループ
     fetchedTasks.tasks.forEach(task => {
+        console.log("C#から届いたタスクの生データ:", task);
         // ステータスに応じてチェック状態(checked)を判定
-        // taskstatus: 1=完了(checked属性あり), 0=未完了(属性なし)
-        const isChecked = task.taskstatus === 1 ? 'checked' : '';
+        // taskStatus: 1=完了(checked属性あり), 0=未完了(属性なし)
+        const isChecked = task.taskStatus === 1 ? 'checked' : '';
 
         // 優先度に応じてセレクト状態(select)を判定
-        // taskpriority: 1 = 高, 2 = 中, 3 = 低
-        const selectHigh = task.taskpriority === 1 ? 'selected' : '';
-        const selectMedium = task.taskpriority === 2 ? 'selected' : '';
-        const selectLow = task.taskpriority === 3 ? 'selected' : '';
+        // taskPriority: 1 = 高, 2 = 中, 3 = 低
+        const selectHigh = task.taskPriority === 1 ? 'selected' : '';
+        const selectMedium = task.taskPriority === 2 ? 'selected' : '';
+        const selectLow = task.taskPriority === 3 ? 'selected' : '';
 
         // 解析した内容を元にHTMLを作成
         const taskHtml = `
         <div class="task-item">
-            <input type="checkbox" class="task-status-check" data-id="${task.taskid}" ${isChecked}>
+            <input type="checkbox" class="task-status-check" data-id="${task.taskId}" ${isChecked}>
             
-            <span class="task-title">${task.taskname}</span>
+            <span class="task-title">${task.taskName}</span>
 
-            <select class="task-priority-select" data-id="${task.taskid}">
+            <select class="task-priority-select" data-id="${task.taskId}">
                 <option value="1" ${selectHigh}>高</option>
                 <option value="2" ${selectMedium}>中</option>
                 <option value="3" ${selectLow}>低</option>
             </select>
 
-            <button class="btn-delete-task" data-id="${task.taskid}">削除</button>
+            <button class="btn-delete-task" data-id="${task.taskId}">削除</button>
         </div>
         `;
 
@@ -150,13 +159,14 @@ async function addTask() {
 
     //新規作成POST用
     const requestData = {
-        taskname: newTaskName,
-        taskpriority: newTaskPriority
+        taskName: newTaskName,
+        taskPriority: newTaskPriority
     };
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('/api/todo', {
+        //const response = await fetch('http://localhost:5163/api/todo/add', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -167,6 +177,8 @@ async function addTask() {
         if (response.ok) {
 
             console.log("新規登録に成功しました:");
+            newTaskNameInput.value = '';
+            newTaskPriorityInput.value = '1';
             await fetchTasks();
 
         } else {
@@ -185,7 +197,7 @@ async function addTask() {
                 console.error("不正なリクエストです（400）");
 
                 const errorData = await response.json();
-                const errorMsg = errorData.errors[0].message;
+                const errorMsg = errorData.message;
 
                 if (errorMsg === "INVALID_REQUEST") {
                     alert("送信されたデータの形式（JSON）が正しくありません");
@@ -204,18 +216,22 @@ async function addTask() {
         console.error("通信に失敗しました:", error);
         alert("通信に失敗しました:\n" + error.message);
     }
+
+
 }
 
 //3.タスク削除
 async function deleteTask(taskId) {
 
     const requestData = {
-        taskid: taskId
+        taskId: taskId
     };
 
+    console.log("deleteTaskに渡ってきた値:", taskId);
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('/api/todo', {
+        // const response = await fetch('http://localhost:5163/api/todo/delete', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -236,22 +252,20 @@ async function deleteTask(taskId) {
             }
 
             else if (response.status === 404) {
-                console.error("リクエストしたURLが見つかりません。");
-                alert("リクエストしたURLが見つかりません  :  " + response.url + "\nステータスコード: 404 " + response.statusText);
+
+                const text = await response.text();
+
+                if (text.includes("TASK_NOT_FOUND")) {
+                    alert("対象タスクが見つかりませんでした");
+                }
+                else {
+                    console.error("リクエストしたURLが見つかりません。");
+                    alert("リクエストしたURLが見つかりません  :  " + response.url + "\nステータスコード: 404 " + response.statusText);
+                }
             }
 
             else if (response.status === 400) {
-                console.error("不正なリクエストです（400）");
-
-                const errorData = await response.json();
-                const errorMsg = errorData.errors[0].message;
-
-                if (errorMsg === "INVALID_REQUEST") {
-                    alert("送信されたデータの形式（JSON）が正しくありません");
-                }
-                else if (errorMsg === "TASK_NOT_FOUND") {
-                    alert("対象タスクが見つかりませんでした");
-                }
+                alert("送信されたデータの形式（JSON）が正しくありません");
             }
 
             else {
@@ -269,14 +283,15 @@ async function deleteTask(taskId) {
 async function updateTaskStatus(taskId, isChecked) {
 
     const requestData = {
-        taskid: taskId,
-        taskstatus: isChecked
+        taskId: taskId,
+        taskStatus: isChecked
     };
 
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('/api/todo', {
+        // const response = await fetch('http://localhost:5163/api/todo/editstatus', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/editstatus', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -298,22 +313,20 @@ async function updateTaskStatus(taskId, isChecked) {
             }
 
             else if (response.status === 404) {
-                console.error("リクエストしたURLが見つかりません。");
-                alert("リクエストしたURLが見つかりません  :  " + response.url + "\nステータスコード: 404 " + response.statusText);
+
+                const text = await response.text();
+
+                if (text.includes("TASK_NOT_FOUND")) {
+                    alert("対象タスクが見つかりませんでした");
+                }
+                else {
+                    console.error("リクエストしたURLが見つかりません。");
+                    alert("リクエストしたURLが見つかりません  :  " + response.url + "\nステータスコード: 404 " + response.statusText);
+                }
             }
 
             else if (response.status === 400) {
-                console.error("不正なリクエストです（400）");
-
-                const errorData = await response.json();
-                const errorMsg = errorData.errors[0].message;
-
-                if (errorMsg === "INVALID_REQUEST") {
-                    alert("送信されたデータの形式（JSON）が正しくありません");
-                }
-                else if (errorMsg === "TASK_NOT_FOUND") {
-                    alert("対象タスクが見つかりませんでした");
-                }
+                alert("送信されたデータの形式（JSON）が正しくありません");
             }
 
             else {
@@ -331,13 +344,14 @@ async function updateTaskStatus(taskId, isChecked) {
 async function updateTaskPriority(taskId, taskPriority) {
 
     const requestData = {
-        taskid: taskId,
-        taskpriority: taskPriority
+        taskId: taskId,
+        taskPriority: taskPriority
     };
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('/api/todo', {
+        // const response = await fetch('http://localhost:5163/api/todo/editpriorty', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/editpriorty', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -358,22 +372,20 @@ async function updateTaskPriority(taskId, taskPriority) {
             }
 
             else if (response.status === 404) {
-                console.error("リクエストしたURLが見つかりません。");
-                alert("リクエストしたURLが見つかりません  :  " + response.url + "\nステータスコード: 404 " + response.statusText);
+
+                const text = await response.text();
+
+                if (text.includes("TASK_NOT_FOUND")) {
+                    alert("対象タスクが見つかりませんでした");
+                }
+                else {
+                    console.error("リクエストしたURLが見つかりません。");
+                    alert("リクエストしたURLが見つかりません  :  " + response.url + "\nステータスコード: 404 " + response.statusText);
+                }
             }
 
             else if (response.status === 400) {
-                console.error("不正なリクエストです（400）");
-
-                const errorData = await response.json();
-                const errorMsg = errorData.errors[0].message;
-
-                if (errorMsg === "INVALID_REQUEST") {
-                    alert("送信されたデータの形式（JSON）が正しくありません");
-                }
-                else if (errorMsg === "TASK_NOT_FOUND") {
-                    alert("対象タスクが見つかりませんでした");
-                }
+                alert("送信されたデータの形式（JSON）が正しくありません");
             }
 
             else {
