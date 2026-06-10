@@ -81,7 +81,7 @@
 
 ## API仕様
 
-- 接続URL：http://xxx.xxx.xxx.xxx:8080/api
+- 接続URL：http://xxx.xxx.xxx.xxx:8080/api/task
 
 ## リクエストボディ
 
