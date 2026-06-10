@@ -203,6 +203,11 @@
 { "message": "TITLE_OVER_LENGTH" }
 ```
 
+/add / 優先度の値が範囲外（400）
+``` json
+{ "message": "INVALID_PRIORITY" }
+```
+
 優先度変更
 
 /editpriorty / GET以外のメソッドを受信した（405）
