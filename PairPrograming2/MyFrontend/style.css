@@ -1,0 +1,95 @@
+h1{
+    text-align: center;
+    color: blue;
+}
+
+body{
+    margin: 0;
+    padding: 20px;
+
+    /* 下部固定エリアと重ならないよう余白を確保 */
+    padding-bottom: 100px;
+}
+
+#task-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 30px;
+}
+
+.task-item{
+    width: 700px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 15px;
+    margin-bottom: 15px;
+
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+}
+
+.task-title{
+    flex: 1;
+}
+
+.btn-delete-task{
+    color: red;
+    border: red 1px solid;
+}
+
+.add-area{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-box{
+    width: 610px; /* 700 - ボタン幅 - gap */
+
+    display: flex;
+    align-items: center;
+
+    padding: 10px 15px;
+
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    background-color: white;
+}
+
+#new-task-title{
+    flex: 1;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: 16px;
+}
+
+#new-task-priority{
+    margin-left: auto;
+
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+#add-task-btn{
+    width: 80px;
+    height: 42px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}

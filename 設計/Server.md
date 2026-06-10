@@ -3,59 +3,65 @@
 ## 環境
 
 Nugetパッケージ
-- NLog : ログ出力
-- NLog.Schema : ログ設定時のインテリセンス（候補入力）
+- Dapper : SQL操作
+- Microsoft.Data.SqlClient : DB通信パッケージ
+- Microsoft.AspNetCore.OpenAPI : Aip通信パッケージ
+- NLog.Web.AspNetCore : ログ出力
+- NLog
 
 ## データ定義
 
-科目：Subject
-- 科目番号：Id (int)
-- 名前：Name (string)
-
-生徒：Student
-- 生徒番号：Id (int)
-- 名前：Name (string)
-
-成績：TestResult
-- 管理番号：Id (int)
-- 生徒：Student (Student)
-- 科目：Subject (Subject)
-- 点数：Score (int)
+TaskItem
+- タスク番号：TaskId (int)
+- タスク名：TaskName (string)
+- 優先度：TaskPriority (int)
+- 期限：TaskLimit (DateTime)
+- 完了/未完了：TaskStatus (int)
 
 ## リクエスト用DTO
 
-成績登録：RegisterRequest
-- 生徒ID：StudentId (int)
-- 科目ID：SubjectId (int)
-- 点数：Score (int)
+一覧取得：なし
 
-個人別スコア：なし
+データ登録：AddReq
+- タスク名：TaskName (string)
+- 優先度：TaskPriority (int)
 
-科目別成績リスト：なし
+優先度編集：EditPrirortyReq
+- タスクID：TaskId (int)
+- 優先度：TaskPriority (int)
+
+ステータス編集：EditStatusReq
+- タスクID：TaskId (int)
+- 完了/未完了：TaskStatus (int)
+
+データ削除：DeleteReq
+- タスクID：TaskId (int)
 
 ## レスポンス用DTO
 
-個人別スコア：StudentScoresResponse
-- 生徒名：Name (string)
-- 成績リスト：Subjects (List:SubjectScore)
+一覧取得：IndexRes
+- タスク一覧：Tasks (List:TaskSummary)
 
-科目個別の成績：SubjectScore
-- 科目名：Name (string)
-- 点数：Score (int)
+タスク個別のステータス：TaskSummary
+- タスクID：TaskId (int)
+- タスク名：TaskName (string)
+- 優先度：TaskPrirorty (int)
+- 完了/未完了：TaskStatus (int)
 
-科目別成績リスト：SubjectScoresResponse
-- 科目名:Name (string)
-- 生徒リスト：Students (List:StudentScore)
-
-生徒別の成績：StudentScore
-- 生徒名：Name (string)
-- 点数：Score (int)
-
-汎用エラー：ErrorResponse
+汎用エラー：ErrorRes
   - エラーアイテム：Errors (ErrorItem)
 
 エラーアイテム：ErrorItem
 - エラー内容：Message (string)
+
+## DB定義
+
+tasks
+- task_id INT IDENTITY (1,1) PK,
+- task_name NVARCHAR(30) NOT NULL,
+- task_priority INT NOT NULL DEFAULT 1,
+- task_limit DATE DEFAULT DATEADD(day, 7, GETDATE()),
+- task_status INT NOT NULL DEFAULT 0
 
 ## 画面構成
 
@@ -65,7 +71,7 @@ Nugetパッケージ
 
 ``` bash
 ========================================
-【成績管理スタブ】が起動しました
+【タスク管理スタブ】が起動しました
    ポート番号: 8080
 ========================================
 ペアのPC（クライアント）からの通信を待っています...
@@ -75,7 +81,7 @@ localhost起動
 
 ``` bash
 ========================================
-【成績管理スタブ】が起動しました
+【タスク管理スタブ】が起動しました
    ポート番号: 8080 (localhost)
 ========================================
 ペアのPC（クライアント）からの通信を待っています...

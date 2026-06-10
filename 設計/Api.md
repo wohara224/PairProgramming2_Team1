@@ -53,7 +53,15 @@
     - JSONが不正；400（INVALID_REQUEST）
     - タイトルが空白：400（TITLE_IS_NULL）
   
-[POST] データ変更
+[POST] 優先度変更
+1. クライアントから登録情報をもらう
+2. バリデーションチェック後にデータを変更し、結果を返す
+    - 正常なリクエスト：200
+    - POST以外のリクエスト：405
+    - JSONが不正；400（INVALID_REQUEST）
+    - 指定したデータがない：404（TASK_NOT_FOUND）
+
+[POST] ステータス変更
 1. クライアントから登録情報をもらう
 2. バリデーションチェック後にデータを変更し、結果を返す
     - 正常なリクエスト：200
@@ -89,19 +97,28 @@
 [POST] /add
 ``` json
 {
-  "title": XXX,
-  "priority": 1, 
+  "taskName": "XXX",
+  "taskPriority": 1
 }
 ```
 
-データ変更
+優先度変更
 
-[POST] /edit
+[POST] /editpriorty
 ``` json
 {
-  "taskid": 1,
-  "priority": 2,
-  "status": 1,
+  "taskId": 1,
+  "taskPriority": 2
+}
+```
+
+ステータス変更
+
+[POST] /editstatus
+``` json
+{
+  "taskId": 1,
+  "taskStatus": 1
 }
 ```
 
@@ -110,7 +127,7 @@
 [POST] /delete
 ``` json
 {
-  "taskid": 1,
+  "taskId": 1
 }
 ```
 
@@ -121,11 +138,11 @@
 /index
 ``` json
 {
-  "task":[
-    {"taskid": 1, "title": XXX, "priority": 1, "status": 1 },
-    {"taskid": 2, "title": XXX, "priority": 2, "status": 1 },
-    {"taskid": 3, "title": XXX, "priority": 3, "status": 0 },
-    {"taskid": 4, "title": XXX, "priority": 1, "status": 0 }
+  "tasks":[
+    {"taskId": 1, "taskName": "XXX", "taskPriority": 1, "taskStatus": 1 },
+    {"taskId": 2, "taskName": "XXX", "taskPriority": 2, "taskStatus": 1 },
+    {"taskId": 3, "taskName": "XXX", "taskPriority": 3, "taskStatus": 0 },
+    {"taskId": 4, "taskName": "XXX", "taskPriority": 1, "taskStatus": 0 }
   ]
 }
 ```
@@ -137,9 +154,16 @@
 {}
 ```
 
-データ変更
+優先度変更
 
-/edit
+/editpriorty
+``` json
+{}
+```
+
+ステータス変更
+
+/editstatus
 ``` json
 {}
 ```
@@ -184,14 +208,14 @@
 }
 ```
 
-データ変更
+優先度変更
 
-/edit / GET以外のメソッドを受信した（405）
+/editpriorty / GET以外のメソッドを受信した（405）
 ``` json
 {}
 ```
 
-/edit / JSONがおかしい、変換できない（400）
+/editpriorty / JSONがおかしい、変換できない（400）
 ``` json
 {
   "errors": [
@@ -200,7 +224,32 @@
 }
 ```
 
-/edit / タスクが存在しない（404）
+/editpriorty / タスクが存在しない（404）
+``` json
+{
+  "errors": [
+    { "message": "TASK_NOT_FOUND" }
+  ]
+}
+```
+
+ステータス変更
+
+/editstatus / GET以外のメソッドを受信した（405）
+``` json
+{}
+```
+
+/editstatus / JSONがおかしい、変換できない（400）
+``` json
+{
+  "errors": [
+    { "message": "INVALID_REQUEST" }
+  ]
+}
+```
+
+/editstatus / タスクが存在しない（404）
 ``` json
 {
   "errors": [
