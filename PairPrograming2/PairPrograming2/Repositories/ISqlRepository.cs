@@ -6,7 +6,7 @@ public interface ISqlRepository
 {
     Task<IEnumerable<TaskItem>> GetTasks();
     Task AddTask(AddReq req);
-    Task UpdatePriority(EditPriorityReq req);
-    Task UpdateStatus(EditStatusReq req);
-    Task DeleteTask(int TaskId);
+    Task<int> UpdatePriority(EditPriorityReq req);
+    Task<int> UpdateStatus(EditStatusReq req);
+    Task<int> DeleteTask(int TaskId);
 }
