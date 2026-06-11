@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PairPrograming2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39239d7859c20c71eebdab97e0643c9507f44535")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d674788312deba3e07cff4e5e0862ba2719a5a24")]
 [assembly: System.Reflection.AssemblyProductAttribute("PairPrograming2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PairPrograming2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
