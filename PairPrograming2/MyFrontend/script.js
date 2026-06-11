@@ -8,8 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //新規登録ボタンが押されたとき
 let addButton = document.getElementById("add-task-btn");
-addButton.addEventListener("click", () => {
-    addTask();
+addButton.addEventListener("click", async() => {
+
+    //登録ボタンを非活性にし登録完了まで押せない状態にする
+    //エラーで終了した場合でも操作可能状態に戻す
+    addButton.disabled = true;
+    addButton.innerText = "登録中"
+    try{
+    await addTask();
+    }finally{
+    addButton.disabled = false;
+    addButton.innerText = "登録"
+    }
 });
 
 //リスト内の何かが変更、クリックされたとき
@@ -45,12 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchTasks() {
 
     try {
-        // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        // const response = await fetch('http://localhost:5163/api/todo/index');
-        const response = await fetch('http://172.16.7.15:8080/api/Todo/index');
+        // C#のコントローラー（api/todos）にデータをリクエスト
+        const response = await fetch('http://localhost:5163/api/todo/index');
+        // const response = await fetch('http://172.16.7.15:8080/api/Todo/index');
 
         if (response.ok) {
-            // 届いたJSONデータをJavaScriptの配列に変換して格納
+            // 届いたJSONデータを格納
             fetchedTasks = await response.json();
             console.log("サーバーからデータを取得しました:", fetchedTasks);
         } else {
@@ -92,9 +102,24 @@ async function fetchTasks() {
         const selectMedium = task.taskPriority === 2 ? 'selected' : '';
         const selectLow = task.taskPriority === 3 ? 'selected' : '';
 
+        //優先度による背景色の変更を行うため、取得した優先度に応じてclassを付与
+        let priorityClass = '';
+        switch (task.taskPriority) {
+            case 1:
+                priorityClass = 'selectHigh';
+                break;
+            case 2:
+                priorityClass = 'selectMedium';
+                break;
+            case 3:
+            default:
+                priorityClass = 'selectLow';
+                break;
+        }
+
         // 解析した内容を元にHTMLを作成
         const taskHtml = `
-        <div class="task-item">
+        <div class="task-item ${priorityClass}" >
             <input type="checkbox" class="task-status-check" data-id="${task.taskId}" ${isChecked}>
             
             <span class="task-title">${task.taskName}</span>
@@ -135,6 +160,11 @@ async function addTask() {
         return;
     }
 
+    if (newTaskName.length> 50) {
+        alert("タスク名は50文字以内で入力して下さい");
+        return;
+    }
+
     //新規作成POST用
     const requestData = {
         taskName: newTaskName,
@@ -143,8 +173,8 @@ async function addTask() {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        // const response = await fetch('http://localhost:5163/api/todo/add', {
-        const response = await fetch('http://172.16.7.15:8080/api/Todo/add', {
+        const response = await fetch('http://localhost:5163/api/todo/add', {
+        // const response = await fetch('http://172.16.7.15:8080/api/Todo/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -207,8 +237,8 @@ async function deleteTask(taskId) {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        // const response = await fetch('http://localhost:5163/api/todo/delete', {
-        const response = await fetch('http://172.16.7.15:8080/api/Todo/delete', {
+        const response = await fetch('http://localhost:5163/api/todo/delete', {
+        // const response = await fetch('http://172.16.7.15:8080/api/Todo/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -267,8 +297,8 @@ async function updateTaskStatus(taskId, isChecked) {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        // const response = await fetch('http://localhost:5163/api/todo/editstatus', {
-        const response = await fetch('http://172.16.7.15:8080/api/Todo/editstatus', {
+        const response = await fetch('http://localhost:5163/api/todo/editstatus', {
+        // const response = await fetch('http://172.16.7.15:8080/api/Todo/editstatus', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -327,8 +357,8 @@ async function updateTaskPriority(taskId, taskPriority) {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        // const response = await fetch('http://localhost:5163/api/todo/editpriorty', {
-        const response = await fetch('http://172.16.7.15:8080/api/Todo/editpriorty', {
+        const response = await fetch('http://localhost:5163/api/todo/editpriorty', {
+        // const response = await fetch('http://172.16.7.15:8080/api/Todo/editpriorty', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
