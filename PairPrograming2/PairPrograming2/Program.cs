@@ -22,6 +22,14 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<ISqlRepository, SqlRepository>();
 builder.Services.AddProblemDetails();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = context =>
@@ -33,6 +41,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
         logger.LogWarning(
             "リクエスト形式不正 Path:{Path}",
             context.HttpContext.Request.Path);
+        Console.WriteLine("Invalid Requsest");
 
         return new BadRequestObjectResult(
             new ErrorRes("INVALID_REQUEST"));
@@ -68,6 +77,7 @@ app.UseExceptionHandler(exceptionHandlerApp =>
             logger.LogError(
                 exceptionFeature.Error,
                 "未処理例外発生");
+            Console.WriteLine("System Error");
         }
 
         context.Response.StatusCode = 500;
@@ -77,6 +87,17 @@ app.UseExceptionHandler(exceptionHandlerApp =>
     });
 });
 
+app.UseCors("MyPolicy");
+
 app.MapControllers();
+
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("Application started.");
+    Console.WriteLine("Application Started");
+    Console.WriteLine("");
+
+});
 
 app.Run();
