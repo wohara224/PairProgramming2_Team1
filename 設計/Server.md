@@ -17,7 +17,6 @@ TaskItem
 - 優先度：TaskPriority (int)
 - 期限：TaskLimit (DateTime)
 - 完了/未完了：TaskStatus (int)
-- バージョン：TaskVersion (int)
 
 ## リクエスト用DTO
 
