@@ -56,8 +56,8 @@ async function fetchTasks() {
 
     try {
         // C#のコントローラー（api/todos）にデータをリクエスト
-        const response = await fetch('http://localhost:5163/api/todo/index');
-        // const response = await fetch('http://172.16.7.15:8080/api/Todo/index');
+        // const response = await fetch('http://localhost:5163/api/todo/index');
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/index');
 
         if (response.ok) {
             // 届いたJSONデータを格納
@@ -173,8 +173,8 @@ async function addTask() {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('http://localhost:5163/api/todo/add', {
-        // const response = await fetch('http://172.16.7.15:8080/api/Todo/add', {
+        // const response = await fetch('http://localhost:5163/api/todo/add', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -237,8 +237,8 @@ async function deleteTask(taskId) {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('http://localhost:5163/api/todo/delete', {
-        // const response = await fetch('http://172.16.7.15:8080/api/Todo/delete', {
+        // const response = await fetch('http://localhost:5163/api/todo/delete', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -297,8 +297,8 @@ async function updateTaskStatus(taskId, isChecked) {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('http://localhost:5163/api/todo/editstatus', {
-        // const response = await fetch('http://172.16.7.15:8080/api/Todo/editstatus', {
+        // const response = await fetch('http://localhost:5163/api/todo/editstatus', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/editstatus', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -357,8 +357,8 @@ async function updateTaskPriority(taskId, taskPriority) {
 
     try {
         // C#のコントローラー（api/todos）にデータをちょうだいとリクエスト
-        const response = await fetch('http://localhost:5163/api/todo/editpriorty', {
-        // const response = await fetch('http://172.16.7.15:8080/api/Todo/editpriorty', {
+        // const response = await fetch('http://localhost:5163/api/todo/editpriorty', {
+        const response = await fetch('http://172.16.7.15:8080/api/Todo/editpriorty', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
