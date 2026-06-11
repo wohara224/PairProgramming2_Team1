@@ -2,6 +2,7 @@
 
 ## 画面レイアウト
 
+<img width="3120" height="2107" alt="メディア (4)" src="https://github.com/user-attachments/assets/d8871b95-3f1e-422c-9384-457d1dc00507" />
 
 ## 画面表示
 
