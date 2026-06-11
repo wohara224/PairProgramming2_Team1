@@ -25,7 +25,8 @@ public class SqlRepository : ISqlRepository
                 task_name AS TaskName,
                 task_priority AS TaskPriority,
                 task_limit AS TaskLimit,
-                task_status AS TaskStatus
+                task_status AS TaskStatus,
+                task_version AS TaskVersion
             FROM tasks
             ORDER BY task_id;";
 

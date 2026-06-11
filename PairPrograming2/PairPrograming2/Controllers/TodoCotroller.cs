@@ -49,6 +49,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("タスク名無し IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Title Is Null");
+            Console.WriteLine("");
 
             return BadRequest(new ErrorRes("TITLE_IS_NULL"));
         }
@@ -56,6 +57,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("タスク名オーバー IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Title Over Length");
+            Console.WriteLine("");
 
             return BadRequest(new ErrorRes("TITLE_OVER_LENGTH"));
         }
@@ -63,6 +65,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("無効な優先度 IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Invalid Priority");
+            Console.WriteLine("");
 
             return BadRequest(new ErrorRes("INVALID_PRIORITY"));
         }
@@ -86,6 +89,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("無効な優先度 IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Invalid Priority");
+            Console.WriteLine("");
 
             return BadRequest(new ErrorRes("INVALID_PRIORITY"));
         }
@@ -96,6 +100,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("該当タスク無し IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Task Not Found");
+            Console.WriteLine("");
 
             return NotFound(new ErrorRes("TASK_NOT_FOUND"));
         }
@@ -117,6 +122,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("無効なステータス IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Invalid Status");
+            Console.WriteLine("");
 
             return BadRequest(new ErrorRes("INVALID_STATUS"));
         }
@@ -127,6 +133,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("該当タスク無し IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Task Not Found");
+            Console.WriteLine("");
 
             return NotFound(new ErrorRes("TASK_NOT_FOUND"));
         }
@@ -150,6 +157,7 @@ public class TodoController : ControllerBase
         {
             _logger.LogWarning("該当タスク無し IP:{Ip}", HttpContext.Connection.RemoteIpAddress);
             Console.WriteLine("Task Not Found");
+            Console.WriteLine("");
 
             return NotFound(new ErrorRes("TASK_NOT_FOUND"));
         }
