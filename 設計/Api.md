@@ -48,7 +48,7 @@
 2. バリデーションチェック後にデータを登録し、結果を返す
     - 正常なリクエスト：204
     - POST以外のリクエスト：405
-    - JSONが不正；400（INVALID_REQUEST）
+    - JSONが不正：400（INVALID_REQUEST）
     - タスク名が空白：400（TITLE_IS_NULL）
     - タスク名が30文字以上：400（TITLE_OVER_LENGTH）
     - 優先度の値が範囲外：400（INVALID_PRIORITY）
@@ -58,7 +58,7 @@
 2. バリデーションチェック後にデータを変更し、結果を返す
     - 正常なリクエスト：204
     - POST以外のリクエスト：405
-    - JSONが不正；400（INVALID_REQUEST）
+    - JSONが不正：400（INVALID_REQUEST）
     - 優先度の値が範囲外：400（INVALID_PRIORITY）
     - 指定したデータがない：404（TASK_NOT_FOUND）
     
@@ -68,7 +68,7 @@
 2. バリデーションチェック後にデータを変更し、結果を返す
     - 正常なリクエスト：204
     - POST以外のリクエスト：405
-    - JSONが不正；400（INVALID_REQUEST）
+    - JSONが不正：400（INVALID_REQUEST）
     - ステータスの値が範囲外：400（INVALID_STATUS）
     - 指定したデータがない：404（TASK_NOT_FOUND）
 
@@ -77,7 +77,7 @@
 2. バリデーションチェック後にデータを削除し、結果を返す
     - 正常なリクエスト：204
     - POST以外のリクエスト：405
-    - JSONが不正；400（INVALID_REQUEST）
+    - JSONが不正：400（INVALID_REQUEST）
     - 指定したデータがない：404（TASK_NOT_FOUND）
 
 DBとの通信異常 -> 500（SYSTEM_ERROR）
