@@ -160,8 +160,8 @@ async function addTask() {
         return;
     }
 
-    if (newTaskName.length> 50) {
-        alert("タスク名は50文字以内で入力して下さい");
+    if (newTaskName.length> 30) {
+        alert("タスク名は30文字以内で入力して下さい");
         return;
     }
 
