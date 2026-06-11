@@ -7,4 +7,5 @@ public class TaskItem
     public int TaskPriority { get; set; }
     public DateTime TaskLImit { get; set; }
     public int TaskStatus { get; set; }
+    public int TaskVersion { get; set; }
 }

@@ -42,6 +42,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
             "リクエスト形式不正 Path:{Path}",
             context.HttpContext.Request.Path);
         Console.WriteLine("Invalid Requsest");
+        Console.WriteLine("");
 
         return new BadRequestObjectResult(
             new ErrorRes("INVALID_REQUEST"));
@@ -76,8 +77,9 @@ app.UseExceptionHandler(exceptionHandlerApp =>
         {
             logger.LogError(
                 exceptionFeature.Error,
-                "未処理例外発生");
+                "System Error");
             Console.WriteLine("System Error");
+            Console.WriteLine("");
         }
 
         context.Response.StatusCode = 500;
